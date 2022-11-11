@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  View,
   Text,
   StyleSheet,
   Image,
@@ -15,6 +14,11 @@ import {
 function LoginView() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+
+  const buttonPressed = () => {
+    console.log(email);
+    console.log(password);
+  };
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -42,13 +46,8 @@ function LoginView() {
           value={password}
         />
         <TouchableOpacity style={styles.loginButton}>
-          <Button
-            title={"Login"}
-            color="#1F7A8C"
-            onPress={() => console.log("Button Pressed")}
-          />
+          <Button title={"Login"} color="#1F7A8C" onPress={buttonPressed} />
         </TouchableOpacity>
-        <View></View>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
