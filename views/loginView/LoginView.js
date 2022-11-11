@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Text,
-  View,
   StyleSheet,
   Image,
   TextInput,
@@ -26,6 +25,9 @@ function LoginView() {
           placeholder="Enter Email"
           placeholderTextColor="#aaa"
           keyboardType={"email-address"}
+          autoCapitalize={"none"}
+          onChangeText={(text) => setEmail(text)}
+          value={email}
         />
         <TextInput
           style={[styles.textInput, styles.passwordInput]}
