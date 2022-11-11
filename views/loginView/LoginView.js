@@ -5,7 +5,7 @@ function LoginView() {
   return (
     <View style={styles.container}>
       <Image source={require("../../assets/logo192.png")} style={styles.logo} />
-      <Text>LoginView</Text>
+      <Text style={styles.titleText}>LOGIN</Text>
     </View>
   );
 }
@@ -20,7 +20,12 @@ const styles = StyleSheet.create({
   logo: {
     width: "20%",
     height: "10%",
-    margin: 10,
+    margin: 20,
+  },
+  titleText: {
+    fontSize: 25,
+    color: "white",
+    fontWeight: "bold",
   },
 });
 
