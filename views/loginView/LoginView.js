@@ -11,6 +11,7 @@ import {
 
 function LoginView() {
   const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -34,6 +35,8 @@ function LoginView() {
           placeholder="Enter Password"
           placeholderTextColor="#aaa"
           secureTextEntry={true}
+          onChangeText={(text) => setPassword(text)}
+          value={password}
         />
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
