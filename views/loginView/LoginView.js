@@ -1,25 +1,40 @@
 import React from "react";
-import { Text, View, StyleSheet, Image, TextInput } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  TextInput,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 
 function LoginView() {
   const [email, setEmail] = React.useState("");
 
   return (
-    <View style={styles.container}>
-      <Image source={require("../../assets/logo192.png")} style={styles.logo} />
-      <Text style={styles.titleText}>LOGIN</Text>
-      <TextInput
-        style={styles.textInput}
-        placeholder="Enter Email"
-        placeholderTextColor="#aaa"
-      />
-      <TextInput
-        style={[styles.textInput, styles.passwordInput]}
-        placeholder="Enter Password"
-        placeholderTextColor="#aaa"
-        secureTextEntry={true}
-      />
-    </View>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
+        <Image
+          source={require("../../assets/logo192.png")}
+          style={styles.logo}
+        />
+        <Text style={styles.titleText}>LOGIN</Text>
+        <TextInput
+          style={styles.textInput}
+          placeholder="Enter Email"
+          placeholderTextColor="#aaa"
+          keyboardType={"email-address"}
+        />
+        <TextInput
+          style={[styles.textInput, styles.passwordInput]}
+          placeholder="Enter Password"
+          placeholderTextColor="#aaa"
+          secureTextEntry={true}
+        />
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 }
 
