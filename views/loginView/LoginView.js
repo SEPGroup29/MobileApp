@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  View,
   Text,
   StyleSheet,
   Image,
@@ -7,6 +8,8 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
+  Button,
+  TouchableOpacity,
 } from "react-native";
 
 function LoginView() {
@@ -38,6 +41,14 @@ function LoginView() {
           onChangeText={(text) => setPassword(text)}
           value={password}
         />
+        <TouchableOpacity style={styles.loginButton}>
+          <Button
+            title={"Login"}
+            color="#1F7A8C"
+            onPress={() => console.log("Button Pressed")}
+          />
+        </TouchableOpacity>
+        <View></View>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
@@ -72,6 +83,12 @@ const styles = StyleSheet.create({
   },
   passwordInput: {
     top: 40,
+  },
+  loginButton: {
+    top: 60,
+    backgroundColor: "white",
+    width: "80%",
+    borderRadius: 5,
   },
 });
 
