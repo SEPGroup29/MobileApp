@@ -1,5 +1,12 @@
 import React, { useEffect } from "react";
-import { Text, View, StyleSheet, Button } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Button,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 
 function QRScannerView() {
@@ -28,6 +35,7 @@ function QRScannerView() {
 
   return (
     <View style={styles.container}>
+      <Image source={require("../../assets/logo192.png")} style={styles.logo} />
       <View style={styles.qrScanner}>
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
@@ -35,7 +43,13 @@ function QRScannerView() {
         />
       </View>
       {scanned && (
-        <Button title={"Tap to Scan Again"} onPress={() => setScanned(false)} />
+        <TouchableOpacity style={styles.loginButton}>
+          <Button
+            title={"Tap To Scan Again"}
+            color="#1F7A8C"
+            onPress={() => setScanned(false)}
+          />
+        </TouchableOpacity>
       )}
     </View>
   );
@@ -48,11 +62,22 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     height: "80%",
-    backgroundColor,
+    backgroundColor: "#1F7A8C",
   },
   qrScanner: {
     height: "50%",
     width: "80%",
+  },
+  logo: {
+    width: "20%",
+    height: "10%",
+    margin: 20,
+  },
+  loginButton: {
+    top: 20,
+    backgroundColor: "white",
+    width: "80%",
+    borderRadius: 5,
   },
 });
 
