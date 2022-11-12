@@ -20,10 +20,10 @@ function QRScannerView({ navigation }) {
     })();
   }, []);
 
-  const handleBarCodeScanned = ({ type, data }) => {
+  const handleBarCodeScanned = ({ data }) => {
     setScanned(true);
     Alert.alert("Scanned!", `ID number: ${data}`, [
-      { text: "OK", onPress: () => setScanned(false) },
+      { text: "OK", onPress: () => navigation.navigate("FuelFill") },
       { text: "Cancel", onPress: () => setScanned(false) },
     ]);
     // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
