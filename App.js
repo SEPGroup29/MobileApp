@@ -3,5 +3,5 @@ import FuelFillView from "./views/fuelRefillPage/FuelFillView";
 import QRScannerView from "./views/qrScannerView/QRScannerView";
 
 export default function App() {
-  return <QRScannerView />;
+  return <LoginView />;
 }
