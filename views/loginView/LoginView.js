@@ -11,13 +11,12 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-function LoginView() {
+function LoginView({ navigation }) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
   const buttonPressed = () => {
-    console.log(email);
-    console.log(password);
+    navigation.navigate("QRScanner");
   };
 
   return (

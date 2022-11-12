@@ -36,7 +36,7 @@ function FuelFillView() {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <KeyboardAvoidingView style={styles.container} behavior="padding">
-        <Text style={styles.heading}>672923076V</Text>
+        <Text style={styles.heading}>{route.params.id}</Text>
         <View style={styles.vehicleNumberContainer}>
           <Text style={[styles.heading, styles.vehicleNumber]}>AXQ-6484</Text>
         </View>
