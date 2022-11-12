@@ -8,13 +8,29 @@ import {
   Keyboard,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 
-function FuelFillView({ route }) {
-  const [fuelQuantity, setFuelQuantity] = React.useState("");
+function FuelFillView() {
+  const [fuelQuantityInput, setFuelQuantityInput] = React.useState("");
+  const [fuelQuantity, setFuelQuantity] = React.useState(0);
 
-  const buttonPressed = () => {
-    console.log(fuelQuantity);
+  const buttonPressed = async () => {
+    if (/^\d+$/.test(fuelQuantityInput)) {
+      const value = parseInt(fuelQuantityInput);
+      if (value < 1 || isNaN(value)) {
+        Alert.alert("Fuel Quantity must be greater than 0");
+        setFuelQuantityInput("");
+        setFuelQuantity(0);
+      } else {
+        Alert.alert("Fuel Quantity is " + value);
+        setFuelQuantity(value);
+      }
+    } else {
+      Alert.alert("Invalid Input", "Please enter a valid number");
+      setFuelQuantity(0);
+      setFuelQuantityInput("");
+    }
   };
 
   return (
@@ -46,8 +62,8 @@ function FuelFillView({ route }) {
           style={styles.fuelAmountInput}
           placeholder="Fuel Amount"
           keyboardType="numeric"
-          value={fuelQuantity}
-          onChangeText={(text) => setFuelQuantity(text)}
+          value={fuelQuantityInput}
+          onChangeText={(text) => setFuelQuantityInput(text)}
         />
         <Text style={styles.literSign}>L</Text>
         <TouchableOpacity style={styles.refillButton} onPress={buttonPressed}>
