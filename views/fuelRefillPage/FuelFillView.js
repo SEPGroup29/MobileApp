@@ -1,0 +1,178 @@
+import React from "react";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  KeyboardAvoidingView,
+  Keyboard,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
+
+function FuelFillView() {
+  const [fuelQuantity, setFuelQuantity] = React.useState("");
+
+  const buttonPressed = () => {
+    console.log(fuelQuantity);
+  };
+
+  return (
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
+        <Text style={styles.heading}>672923076V</Text>
+        <View style={styles.vehicleNumberContainer}>
+          <Text style={[styles.heading, styles.vehicleNumber]}>AXQ-6484</Text>
+        </View>
+        <Text style={styles.vehicleType}>Motor Bike - Petrol</Text>
+        <View style={styles.fuelTypeContainer}>
+          <View>
+            <Text style={styles.fuelTypeHeader}>Fuel Type: </Text>
+          </View>
+          <View>
+            <Text style={styles.fuelType}>Petrol</Text>
+          </View>
+        </View>
+        <View style={styles.remainingFuelQuotaContainer}>
+          <View style={styles.remainingFuelQuotaLine}></View>
+          <Text style={styles.remainingFuelQuotaText}>
+            Remaining Fuel Quota
+          </Text>
+          <View style={styles.remainingFuelQuotaLine}></View>
+        </View>
+        <Text style={styles.remainingFuelQuota}>20.00 L</Text>
+        <View style={styles.horizontalLine} />
+        <TextInput
+          style={styles.fuelAmountInput}
+          placeholder="Fuel Amount"
+          keyboardType="numeric"
+          value={fuelQuantity}
+          onChangeText={(text) => setFuelQuantity(text)}
+        />
+        <Text style={styles.literSign}>L</Text>
+        <TouchableOpacity style={styles.refillButton} onPress={buttonPressed}>
+          <Text style={styles.refillButtonText}> UPDATE </Text>
+        </TouchableOpacity>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    alignContent: "center",
+    backgroundColor: "#1F7A8C",
+  },
+  heading: {
+    fontSize: 30,
+    color: "white",
+  },
+  vehicleNumberContainer: {
+    backgroundColor: "white",
+    padding: 10,
+    paddingLeft: 30,
+    paddingRight: 30,
+    alignItems: "center",
+    justifyContent: "center",
+    top: 10,
+    borderRadius: 100,
+    opacity: 0.8,
+  },
+  vehicleNumber: {
+    color: "black",
+  },
+  vehicleType: {
+    fontSize: 15,
+    top: 15,
+    color: "white",
+  },
+  fuelTypeContainer: {
+    flexWrap: "nowrap",
+    flexDirection: "row",
+    top: 20,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  fuelTypeHeader: {
+    fontSize: 20,
+    color: "white",
+  },
+  fuelType: {
+    fontSize: 40,
+    color: "orange",
+    fontWeight: "bold",
+    textTransform: "uppercase",
+  },
+  remainingFuelQuotaLine: {
+    borderBottomColor: "white",
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    width: "100%",
+    flex: 1,
+  },
+  horizontalLine: {
+    top: 40,
+    borderBottomColor: "white",
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    width: "100%",
+  },
+  remainingFuelQuotaText: {
+    backgroundColor: "#1F7A8C",
+    paddingLeft: 10,
+    paddingRight: 10,
+    flex: 2,
+    textAlign: "center",
+    color: "white",
+    fontWeight: "bold",
+    fontSize: "auto",
+  },
+  remainingFuelQuotaContainer: {
+    top: 30,
+    width: "100%",
+    alignItems: "center",
+    alignContent: "center",
+    flexDirection: "row",
+  },
+  remainingFuelQuota: {
+    top: 30,
+    fontSize: 50,
+    fontWeight: "bold",
+    color: "orange",
+  },
+  fuelAmountInput: {
+    top: 60,
+    color: "black",
+    height: 80,
+    fontSize: 30,
+    width: "80%",
+    backgroundColor: "white",
+    borderRadius: 10,
+    paddingLeft: 10,
+    textAlign: "center",
+  },
+  refillButton: {
+    top: 80,
+    backgroundColor: "orange",
+    width: "80%",
+    borderRadius: 100,
+    padding: 10,
+  },
+  refillButtonText: {
+    color: "#1F7A8C",
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  literSign: {
+    color: "black",
+    fontSize: 30,
+    textAlign: "right",
+    width: "80%",
+    paddingRight: 25,
+    alignSelf: "center",
+  },
+});
+
+export default FuelFillView;
