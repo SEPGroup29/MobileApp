@@ -1,8 +1,15 @@
 import React, { useEffect } from "react";
-import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 
-function QRScannerView() {
+function QRScannerView({ navigation }) {
   const [hasPermission, setHasPermission] = React.useState(null);
   const [scanned, setScanned] = React.useState(false);
 
@@ -15,7 +22,11 @@ function QRScannerView() {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    Alert.alert("Scanned!", `ID number: ${data}`, [
+      { text: "OK", onPress: () => setScanned(false) },
+      { text: "Cancel", onPress: () => setScanned(false) },
+    ]);
+    // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
   };
 
   if (hasPermission === null) {
