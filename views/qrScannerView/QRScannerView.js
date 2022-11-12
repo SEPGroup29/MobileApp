@@ -39,7 +39,7 @@ function QRScannerView() {
       <View style={styles.qrScanner}>
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={StyleSheet.absoluteFillObject}
+          style={styles.barcode}
         />
       </View>
       {scanned && (
@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#1F7A8C",
   },
   qrScanner: {
+    borderRadius: 20,
     height: "50%",
     width: "80%",
   },
@@ -78,6 +79,11 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     width: "80%",
     borderRadius: 5,
+  },
+  barcode: {
+    height: "100%",
+    width: "100%",
+    borderRadius: 20,
   },
 });
 

@@ -11,8 +11,10 @@ import {
 } from "react-native";
 
 function FuelFillView() {
+  const [fuelQuantity, setFuelQuantity] = React.useState("");
+
   const buttonPressed = () => {
-    console.log("Button pressed");
+    console.log(fuelQuantity);
   };
 
   return (
@@ -44,7 +46,10 @@ function FuelFillView() {
           style={styles.fuelAmountInput}
           placeholder="Fuel Amount"
           keyboardType="numeric"
+          value={fuelQuantity}
+          onChangeText={(text) => setFuelQuantity(text)}
         />
+        <Text style={styles.literSign}>L</Text>
         <TouchableOpacity style={styles.refillButton} onPress={buttonPressed}>
           <Text style={styles.refillButtonText}> UPDATE </Text>
         </TouchableOpacity>
@@ -159,6 +164,14 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 20,
     fontWeight: "bold",
+  },
+  literSign: {
+    color: "black",
+    fontSize: 30,
+    textAlign: "right",
+    width: "80%",
+    paddingRight: 25,
+    alignSelf: "center",
   },
 });
 
