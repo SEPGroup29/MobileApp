@@ -22,6 +22,8 @@ function FuelFillView() {
         <Text style={styles.remainingFuelQuotaText}>Remaining Fuel Quota</Text>
         <View style={styles.remainingFuelQuotaLine}></View>
       </View>
+      <Text style={styles.remainingFuelQuota}>20.00 L</Text>
+      <View style={styles.horizontalLine} />
     </SafeAreaView>
   );
 }
@@ -80,6 +82,12 @@ const styles = StyleSheet.create({
     width: "100%",
     flex: 1,
   },
+  horizontalLine: {
+    top: 40,
+    borderBottomColor: "white",
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    width: "100%",
+  },
   remainingFuelQuotaText: {
     backgroundColor: "#1F7A8C",
     paddingLeft: 10,
@@ -96,6 +104,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignContent: "center",
     flexDirection: "row",
+  },
+  remainingFuelQuota: {
+    top: 30,
+    fontSize: 50,
+    fontWeight: "bold",
+    color: "orange",
   },
 });
 
