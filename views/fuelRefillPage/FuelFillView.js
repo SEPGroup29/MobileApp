@@ -17,6 +17,11 @@ function FuelFillView() {
           <Text style={styles.fuelType}>Petrol</Text>
         </View>
       </View>
+      <View style={styles.remainingFuelQuotaContainer}>
+        <View style={styles.remainingFuelQuotaLine}></View>
+        <Text style={styles.remainingFuelQuotaText}>Remaining Fuel Quota</Text>
+        <View style={styles.remainingFuelQuotaLine}></View>
+      </View>
     </SafeAreaView>
   );
 }
@@ -68,6 +73,29 @@ const styles = StyleSheet.create({
     color: "orange",
     fontWeight: "bold",
     textTransform: "uppercase",
+  },
+  remainingFuelQuotaLine: {
+    borderBottomColor: "white",
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    width: "100%",
+    flex: 1,
+  },
+  remainingFuelQuotaText: {
+    backgroundColor: "#1F7A8C",
+    paddingLeft: 10,
+    paddingRight: 10,
+    flex: 2,
+    textAlign: "center",
+    color: "white",
+    fontWeight: "bold",
+    fontSize: "auto",
+  },
+  remainingFuelQuotaContainer: {
+    top: 30,
+    width: "100%",
+    alignItems: "center",
+    alignContent: "center",
+    flexDirection: "row",
   },
 });
 
