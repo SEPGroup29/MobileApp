@@ -1,12 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  Button,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 
 function QRScannerView() {
@@ -43,12 +36,11 @@ function QRScannerView() {
         />
       </View>
       {scanned && (
-        <TouchableOpacity style={styles.loginButton}>
-          <Button
-            title={"Tap To Scan Again"}
-            color="#1F7A8C"
-            onPress={() => setScanned(false)}
-          />
+        <TouchableOpacity
+          style={styles.scanAgainButton}
+          onPress={() => setScanned(false)}
+        >
+          <Text style={styles.scanAgainButtonText}>Tap To Scan Again</Text>
         </TouchableOpacity>
       )}
     </View>
@@ -74,7 +66,7 @@ const styles = StyleSheet.create({
     height: "10%",
     margin: 20,
   },
-  loginButton: {
+  scanAgainButton: {
     top: 20,
     backgroundColor: "white",
     width: "80%",
@@ -84,6 +76,11 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
     borderRadius: 20,
+  },
+  scanAgainButtonText: {
+    textAlign: "center",
+    padding: 10,
+    fontSize: 20,
   },
 });
 
