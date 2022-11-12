@@ -53,9 +53,8 @@ const styles = StyleSheet.create({
     color: "white",
   },
   fuelTypeContainer: {
-    flexWrap: "wrap",
+    flexWrap: "nowrap",
     flexDirection: "row",
-    flex: 1,
     top: 20,
     alignItems: "center",
     justifyContent: "center",
