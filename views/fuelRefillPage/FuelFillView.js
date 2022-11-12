@@ -1,30 +1,55 @@
 import React from "react";
-import { Text, View, StyleSheet, SafeAreaView } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  KeyboardAvoidingView,
+  Keyboard,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
 
 function FuelFillView() {
+  const buttonPressed = () => {
+    console.log("Button pressed");
+  };
+
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.heading}>672923076V</Text>
-      <View style={styles.vehicleNumberContainer}>
-        <Text style={[styles.heading, styles.vehicleNumber]}>AXQ-6484</Text>
-      </View>
-      <Text style={styles.vehicleType}>Motor Bike - Petrol</Text>
-      <View style={styles.fuelTypeContainer}>
-        <View>
-          <Text style={styles.fuelTypeHeader}>Fuel Type: </Text>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
+        <Text style={styles.heading}>672923076V</Text>
+        <View style={styles.vehicleNumberContainer}>
+          <Text style={[styles.heading, styles.vehicleNumber]}>AXQ-6484</Text>
         </View>
-        <View>
-          <Text style={styles.fuelType}>Petrol</Text>
+        <Text style={styles.vehicleType}>Motor Bike - Petrol</Text>
+        <View style={styles.fuelTypeContainer}>
+          <View>
+            <Text style={styles.fuelTypeHeader}>Fuel Type: </Text>
+          </View>
+          <View>
+            <Text style={styles.fuelType}>Petrol</Text>
+          </View>
         </View>
-      </View>
-      <View style={styles.remainingFuelQuotaContainer}>
-        <View style={styles.remainingFuelQuotaLine}></View>
-        <Text style={styles.remainingFuelQuotaText}>Remaining Fuel Quota</Text>
-        <View style={styles.remainingFuelQuotaLine}></View>
-      </View>
-      <Text style={styles.remainingFuelQuota}>20.00 L</Text>
-      <View style={styles.horizontalLine} />
-    </SafeAreaView>
+        <View style={styles.remainingFuelQuotaContainer}>
+          <View style={styles.remainingFuelQuotaLine}></View>
+          <Text style={styles.remainingFuelQuotaText}>
+            Remaining Fuel Quota
+          </Text>
+          <View style={styles.remainingFuelQuotaLine}></View>
+        </View>
+        <Text style={styles.remainingFuelQuota}>20.00 L</Text>
+        <View style={styles.horizontalLine} />
+        <TextInput
+          style={styles.fuelAmountInput}
+          placeholder="Fuel Amount"
+          keyboardType="numeric"
+        />
+        <TouchableOpacity style={styles.refillButton} onPress={buttonPressed}>
+          <Text style={styles.refillButtonText}> UPDATE </Text>
+        </TouchableOpacity>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 }
 
@@ -48,7 +73,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     top: 10,
-    borderRadius: "100%",
+    borderRadius: 100,
     opacity: 0.8,
   },
   vehicleNumber: {
@@ -110,6 +135,30 @@ const styles = StyleSheet.create({
     fontSize: 50,
     fontWeight: "bold",
     color: "orange",
+  },
+  fuelAmountInput: {
+    top: 60,
+    color: "black",
+    height: 80,
+    fontSize: 30,
+    width: "80%",
+    backgroundColor: "white",
+    borderRadius: 10,
+    paddingLeft: 10,
+    textAlign: "center",
+  },
+  refillButton: {
+    top: 80,
+    backgroundColor: "orange",
+    width: "80%",
+    borderRadius: 100,
+    padding: 10,
+  },
+  refillButtonText: {
+    color: "#1F7A8C",
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
   },
 });
 
