@@ -1,6 +1,5 @@
-import LoginPage from "./views/loginView/LoginView";
-import QRScannerView from "./views/qrScannerView/QRScannerView";
+import FuelFillView from "./views/fuelRefillPage/FuelFillView";
 
 export default function App() {
-  return <QRScannerView />;
+  return <FuelFillView />;
 }
