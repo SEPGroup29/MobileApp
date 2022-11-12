@@ -45,8 +45,8 @@ function LoginView() {
           onChangeText={(text) => setPassword(text)}
           value={password}
         />
-        <TouchableOpacity style={styles.loginButton}>
-          <Button title={"Login"} color="#1F7A8C" onPress={buttonPressed} />
+        <TouchableOpacity style={styles.loginButton} onPress={buttonPressed}>
+          <Text style={styles.loginButtonText}>LOGIN</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
@@ -88,6 +88,13 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     width: "80%",
     borderRadius: 5,
+  },
+  loginButtonText: {
+    color: "#1F7A8C",
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 20,
+    padding: 10,
   },
 });
 
