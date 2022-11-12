@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "white",
     fontWeight: "bold",
-    fontSize: "auto",
+    fontSize: 15,
   },
   remainingFuelQuotaContainer: {
     top: 30,
@@ -169,9 +169,8 @@ const styles = StyleSheet.create({
     color: "black",
     fontSize: 30,
     textAlign: "right",
-    width: "80%",
-    paddingRight: 25,
-    alignSelf: "center",
+    paddingRight: 60,
+    alignSelf: "flex-end",
   },
 });
 
