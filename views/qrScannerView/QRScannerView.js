@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 
-function QRScannerView({ navigation }) {
+function QRScannerView({ navigation, route }) {
   const [hasPermission, setHasPermission] = React.useState(null);
   const [scanned, setScanned] = React.useState(false);
 
@@ -25,7 +25,10 @@ function QRScannerView({ navigation }) {
     Alert.alert("Scanned!", `ID number: ${data}`, [
       {
         text: "OK",
-        onPress: () => navigation.navigate("FuelFill", { id: data }),
+        onPress: () => {
+          navigation.navigate("FuelFill", { id: data });
+          setScanned(false);
+        },
       },
       { text: "Cancel", onPress: () => setScanned(false) },
     ]);
@@ -42,6 +45,7 @@ function QRScannerView({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.poName}>{route.params.name}</Text>
       <Image source={require("../../assets/logo192.png")} style={styles.logo} />
       <View style={styles.qrScanner}>
         <BarCodeScanner
@@ -69,6 +73,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: "80%",
     backgroundColor: "#1F7A8C",
+  },
+  poName: {
+    fontSize: 20,
+    color: "#fff",
   },
   qrScanner: {
     borderRadius: 20,
