@@ -26,7 +26,10 @@ function QRScannerView({ navigation, route }) {
       {
         text: "OK",
         onPress: () => {
-          navigation.replace("FuelFill", { id: data });
+          navigation.replace("FuelFill", {
+            id: data,
+            poName: route.params.name,
+          });
           setScanned(true);
         },
       },

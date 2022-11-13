@@ -12,12 +12,12 @@ import {
 } from "react-native";
 import user from "../../api/modules/user";
 
-function FuelFillView({ route }) {
+function FuelFillView({ navigation, route }) {
   const [fuelQuantityInput, setFuelQuantityInput] = React.useState("");
   const [fuelQuantity, setFuelQuantity] = React.useState(0);
   const [voName, setVoName] = React.useState("");
 
-  const buttonPressed = async () => {
+  const updateFuel = async () => {
     if (/^\d+$/.test(fuelQuantityInput)) {
       const value = parseInt(fuelQuantityInput);
       if (value < 1 || isNaN(value)) {
@@ -86,8 +86,16 @@ function FuelFillView({ route }) {
           onChangeText={(text) => setFuelQuantityInput(text)}
         />
         <Text style={styles.literSign}>L</Text>
-        <TouchableOpacity style={styles.refillButton} onPress={buttonPressed}>
+        <TouchableOpacity style={styles.refillButton} onPress={updateFuel}>
           <Text style={styles.refillButtonText}> UPDATE </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.logoutButton}
+          onPress={() =>
+            navigation.replace("QRScanner", { name: route.params.poName })
+          }
+        >
+          <Text style={styles.logoutButtonText}> Scan Another QR </Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
@@ -195,8 +203,21 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     padding: 10,
   },
+  logoutButton: {
+    top: 100,
+    backgroundColor: "red",
+    width: "80%",
+    borderRadius: 100,
+    padding: 10,
+  },
   refillButtonText: {
     color: "#1F7A8C",
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  logoutButtonText: {
+    color: "white",
     textAlign: "center",
     fontSize: 20,
     fontWeight: "bold",
