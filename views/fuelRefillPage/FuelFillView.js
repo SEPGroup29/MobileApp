@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Text,
   View,
@@ -10,10 +10,12 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
+import user from "../../api/modules/user";
 
-function FuelFillView() {
+function FuelFillView({ route }) {
   const [fuelQuantityInput, setFuelQuantityInput] = React.useState("");
   const [fuelQuantity, setFuelQuantity] = React.useState(0);
+  const [voName, setVoName] = React.useState("");
 
   const buttonPressed = async () => {
     if (/^\d+$/.test(fuelQuantityInput)) {
@@ -33,10 +35,28 @@ function FuelFillView() {
     }
   };
 
+  useEffect(() => {
+    getVoName();
+  }, []);
+
+  const getVoName = async () => {
+    try {
+      const response = await user.getUserDetails();
+      if (response) {
+        if (response.status === 200) setVoName(response.data.name);
+      } else {
+        Alert.alert("Error", "Something went wrong");
+      }
+    } catch (error) {
+      Alert.alert("Error", "Response Awe na hutto");
+    }
+  };
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <KeyboardAvoidingView style={styles.container} behavior="padding">
         <Text style={styles.heading}>{route.params.id}</Text>
+        <Text style={styles.heading}>{voName}</Text>
         <View style={styles.vehicleNumberContainer}>
           <Text style={[styles.heading, styles.vehicleNumber]}>AXQ-6484</Text>
         </View>
