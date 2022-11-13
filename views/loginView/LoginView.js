@@ -1,5 +1,6 @@
 import React from "react";
 import authValidation from "../../utils/authValidation";
+import user from "../../api/modules/user";
 
 import {
   Text,
@@ -10,6 +11,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 
 function LoginView({ navigation }) {
@@ -18,8 +20,23 @@ function LoginView({ navigation }) {
   const [isEmailValid, setIsEmailValid] = React.useState(true);
   const [isPasswordValid, setIsPasswordValid] = React.useState(true);
 
-  const buttonPressed = () => {
-    navigation.navigate("QRScanner");
+  const buttonPressed = async () => {
+    try {
+      const response = await user.login(email, password);
+      if (response) {
+        if (response.status === 200) {
+          if (response.data.error) {
+            Alert.alert("Error", response.data.error);
+          } else if (
+            response.data.message === "Pump Operator Login successful"
+          ) {
+            navigation.navigate("QRScanner");
+          }
+        }
+      }
+    } catch (error) {
+      Alert.alert("Error", "Something went wrong");
+    }
   };
 
   const validateEmail = (text) => {
