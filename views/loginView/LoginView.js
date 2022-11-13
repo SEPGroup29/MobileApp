@@ -24,6 +24,7 @@ function LoginView({ navigation }) {
   const buttonPressed = async () => {
     setIsLoading(true);
     try {
+      console.log("email :", email);
       const response = await user.login(email, password);
       if (response) {
         if (response.status === 200) {
@@ -94,7 +95,7 @@ function LoginView({ navigation }) {
         />
         <TouchableOpacity
           style={
-            isEmailValid && isPasswordValid
+            isEmailValid && isPasswordValid && !isLoading
               ? styles.loginButton
               : styles.loginButtonDisabled
           }
