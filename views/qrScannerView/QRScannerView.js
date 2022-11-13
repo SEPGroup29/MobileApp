@@ -27,7 +27,7 @@ function QRScannerView({ navigation, route }) {
         text: "OK",
         onPress: () => {
           navigation.navigate("FuelFill", { id: data });
-          setScanned(false);
+          setScanned(true);
         },
       },
       { text: "Cancel", onPress: () => setScanned(false) },
@@ -45,7 +45,7 @@ function QRScannerView({ navigation, route }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.poName}>{route.params.name}</Text>
+      <Text style={styles.poName}>Operator : {route.params.name}</Text>
       <Image source={require("../../assets/logo192.png")} style={styles.logo} />
       <View style={styles.qrScanner}>
         <BarCodeScanner
@@ -53,14 +53,12 @@ function QRScannerView({ navigation, route }) {
           style={styles.barcode}
         />
       </View>
-      {scanned && (
-        <TouchableOpacity
-          style={styles.scanAgainButton}
-          onPress={() => setScanned(false)}
-        >
-          <Text style={styles.scanAgainButtonText}>Tap To Scan Again</Text>
-        </TouchableOpacity>
-      )}
+      <TouchableOpacity
+        style={styles.scanAgainButton}
+        onPress={navigation.goBack}
+      >
+        <Text style={styles.scanAgainButtonText}>Log Out</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -75,7 +73,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#1F7A8C",
   },
   poName: {
-    fontSize: 20,
+    fontSize: 25,
     color: "#fff",
   },
   qrScanner: {
@@ -90,7 +88,7 @@ const styles = StyleSheet.create({
   },
   scanAgainButton: {
     top: 20,
-    backgroundColor: "white",
+    backgroundColor: "red",
     width: "80%",
     borderRadius: 5,
   },
@@ -103,6 +101,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     padding: 10,
     fontSize: 20,
+    color: "#fff",
+    fontWeight: "bold",
   },
 });
 
