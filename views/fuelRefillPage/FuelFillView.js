@@ -42,14 +42,12 @@ function FuelFillView({ route }) {
   const getVoName = async () => {
     try {
       const response = await user.getUserDetails();
-      console.log("Rsponse is : ", response);
       if (response) {
         if (response.status === 200) setVoName(response.data.name);
       } else {
         Alert.alert("Error", "Something went wrong");
       }
     } catch (error) {
-      console.log("Error: ", error);
       Alert.alert("Error", "Response Awe na hutto");
     }
   };
