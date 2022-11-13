@@ -72,9 +72,13 @@ function LoginView({ navigation }) {
           value={password}
         />
         <TouchableOpacity
-          style={isEmailValid ? styles.loginButton : styles.loginButtonDisabled}
+          style={
+            isEmailValid && isPasswordValid
+              ? styles.loginButton
+              : styles.loginButtonDisabled
+          }
           onPress={buttonPressed}
-          disabled={!isEmailValid}
+          disabled={!isEmailValid && !isPasswordValid}
         >
           <Text style={styles.loginButtonText}>LOGIN</Text>
         </TouchableOpacity>
