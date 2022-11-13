@@ -26,7 +26,7 @@ function QRScannerView({ navigation, route }) {
       {
         text: "OK",
         onPress: () => {
-          navigation.navigate("FuelFill", { id: data });
+          navigation.replace("FuelFill", { id: data });
           setScanned(true);
         },
       },
@@ -55,7 +55,7 @@ function QRScannerView({ navigation, route }) {
       </View>
       <TouchableOpacity
         style={styles.scanAgainButton}
-        onPress={navigation.goBack}
+        onPress={() => navigation.replace("Login")}
       >
         <Text style={styles.scanAgainButtonText}>Log Out</Text>
       </TouchableOpacity>

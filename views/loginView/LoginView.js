@@ -31,7 +31,7 @@ function LoginView({ navigation }) {
             Alert.alert("Error", response.data.error);
             setIsLoading(false);
           } else if (response.data.message === "Login successful") {
-            navigation.navigate("QRScanner", { name: response.data.firstName });
+            navigation.replace("QRScanner", { name: response.data.firstName });
             setIsLoading(false);
           }
         }
