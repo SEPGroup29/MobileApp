@@ -16,6 +16,7 @@ function LoginView({ navigation }) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [isEmailValid, setIsEmailValid] = React.useState(true);
+  const [isPasswordValid, setIsPasswordValid] = React.useState(true);
 
   const buttonPressed = () => {
     navigation.navigate("QRScanner");
@@ -24,6 +25,12 @@ function LoginView({ navigation }) {
   const validateEmail = (text) => {
     const isValid = authValidation.emailValidation(text);
     setIsEmailValid(isValid);
+  };
+
+  const validatePassword = (text) => {
+    const isValid = authValidation.passwordValidation(text);
+    setIsPasswordValid(isValid);
+    console.log(isValid);
   };
 
   return (
@@ -50,11 +57,18 @@ function LoginView({ navigation }) {
           value={email}
         />
         <TextInput
-          style={[styles.textInput, styles.passwordInput]}
+          style={[
+            styles.textInput,
+            styles.passwordInput,
+            { borderBottomColor: isPasswordValid ? "white" : "red" },
+          ]}
           placeholder="Enter Password"
           placeholderTextColor="#aaa"
           secureTextEntry={true}
-          onChangeText={(text) => setPassword(text)}
+          onChangeText={(text) => {
+            setPassword(text);
+            validatePassword(text);
+          }}
           value={password}
         />
         <TouchableOpacity
