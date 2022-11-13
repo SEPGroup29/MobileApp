@@ -24,16 +24,13 @@ function LoginView({ navigation }) {
   const buttonPressed = async () => {
     setIsLoading(true);
     try {
-      console.log("email :", email);
       const response = await user.login(email, password);
       if (response) {
         if (response.status === 200) {
           if (response.data.error) {
             Alert.alert("Error", response.data.error);
             setIsLoading(false);
-          } else if (
-            response.data.message === "Pump Operator Login successful"
-          ) {
+          } else if (response.data.message === "Login successful") {
             navigation.navigate("QRScanner");
             setIsLoading(false);
           }
@@ -100,7 +97,7 @@ function LoginView({ navigation }) {
               : styles.loginButtonDisabled
           }
           onPress={buttonPressed}
-          disabled={!isEmailValid && !isPasswordValid && isLoading}
+          disabled={isLoading || (!isEmailValid && !isPasswordValid)}
         >
           <Text style={styles.loginButtonText}>LOGIN</Text>
         </TouchableOpacity>

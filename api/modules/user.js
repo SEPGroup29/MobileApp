@@ -8,7 +8,10 @@ export default {
   },
   async login(email, password) {
     return await resolver(
-      axiosClient.post("/auth/fs-login", { email: email, password: password })
+      axiosClient.post("/auth/login-pump-operator", {
+        email: email,
+        password: password,
+      })
     );
   },
 };
