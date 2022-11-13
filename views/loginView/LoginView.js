@@ -19,23 +19,28 @@ function LoginView({ navigation }) {
   const [password, setPassword] = React.useState("");
   const [isEmailValid, setIsEmailValid] = React.useState(true);
   const [isPasswordValid, setIsPasswordValid] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const buttonPressed = async () => {
+    setIsLoading(true);
     try {
       const response = await user.login(email, password);
       if (response) {
         if (response.status === 200) {
           if (response.data.error) {
             Alert.alert("Error", response.data.error);
+            setIsLoading(false);
           } else if (
             response.data.message === "Pump Operator Login successful"
           ) {
             navigation.navigate("QRScanner");
+            setIsLoading(false);
           }
         }
       }
     } catch (error) {
       Alert.alert("Error", "Something went wrong");
+      setIsLoading(false);
     }
   };
 
@@ -47,7 +52,6 @@ function LoginView({ navigation }) {
   const validatePassword = (text) => {
     const isValid = authValidation.passwordValidation(text);
     setIsPasswordValid(isValid);
-    console.log(isValid);
   };
 
   return (
@@ -95,7 +99,7 @@ function LoginView({ navigation }) {
               : styles.loginButtonDisabled
           }
           onPress={buttonPressed}
-          disabled={!isEmailValid && !isPasswordValid}
+          disabled={!isEmailValid && !isPasswordValid && isLoading}
         >
           <Text style={styles.loginButtonText}>LOGIN</Text>
         </TouchableOpacity>
