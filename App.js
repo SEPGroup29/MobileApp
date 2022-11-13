@@ -12,7 +12,11 @@ export default function App() {
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Login" component={LoginView} />
         <Stack.Screen name="FuelFill" component={FuelFillView} />
-        <Stack.Screen name="QRScanner" component={QRScannerView} />
+        <Stack.Screen
+          name="QRScanner"
+          component={QRScannerView}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
