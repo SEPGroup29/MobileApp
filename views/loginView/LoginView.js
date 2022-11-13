@@ -1,4 +1,6 @@
 import React from "react";
+import authValidation from "../../utils/authValidation";
+
 import {
   Text,
   StyleSheet,
@@ -7,16 +9,21 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
-  Button,
   TouchableOpacity,
 } from "react-native";
 
 function LoginView({ navigation }) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [isEmailValid, setIsEmailValid] = React.useState(true);
 
   const buttonPressed = () => {
     navigation.navigate("QRScanner");
+  };
+
+  const validateEmail = (text) => {
+    const isValid = authValidation.emailValidation(text);
+    setIsEmailValid(isValid);
   };
 
   return (
@@ -28,12 +35,18 @@ function LoginView({ navigation }) {
         />
         <Text style={styles.titleText}>LOGIN</Text>
         <TextInput
-          style={styles.textInput}
+          style={[
+            styles.textInput,
+            { borderColor: isEmailValid ? "white" : "red" },
+          ]}
           placeholder="Enter Email"
           placeholderTextColor="#aaa"
           keyboardType={"email-address"}
           autoCapitalize={"none"}
-          onChangeText={(text) => setEmail(text)}
+          onChangeText={(text) => {
+            setEmail(text);
+            validateEmail(text);
+          }}
           value={email}
         />
         <TextInput
@@ -44,7 +57,11 @@ function LoginView({ navigation }) {
           onChangeText={(text) => setPassword(text)}
           value={password}
         />
-        <TouchableOpacity style={styles.loginButton} onPress={buttonPressed}>
+        <TouchableOpacity
+          style={isEmailValid ? styles.loginButton : styles.loginButtonDisabled}
+          onPress={buttonPressed}
+          disabled={!isEmailValid}
+        >
           <Text style={styles.loginButtonText}>LOGIN</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
@@ -77,16 +94,24 @@ const styles = StyleSheet.create({
     top: 20,
     width: "80%",
     borderBottomWidth: 1,
-    borderBottomColor: "white",
+    // borderBottomColor: "white",
   },
   passwordInput: {
     top: 40,
+    borderBottomColor: "white",
   },
   loginButton: {
     top: 60,
     backgroundColor: "white",
     width: "80%",
     borderRadius: 5,
+  },
+  loginButtonDisabled: {
+    top: 60,
+    backgroundColor: "white",
+    width: "80%",
+    borderRadius: 5,
+    opacity: 0.5,
   },
   loginButtonText: {
     color: "#1F7A8C",
