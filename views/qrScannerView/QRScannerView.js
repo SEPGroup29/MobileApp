@@ -22,12 +22,14 @@ function QRScannerView({ navigation, route }) {
 
   const handleBarCodeScanned = ({ data }) => {
     setScanned(true);
-    Alert.alert("Scanned!", `ID number: ${data}`, [
+    data = JSON.parse(data);
+    console.log(data.NIC);
+    Alert.alert("Scanned!", `ID number: ${data.NIC}`, [
       {
         text: "OK",
         onPress: () => {
           navigation.replace("FuelFill", {
-            id: data,
+            id: data.NIC,
             poName: route.params.name,
           });
           setScanned(true);
