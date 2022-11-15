@@ -25,6 +25,7 @@ function LoginView({ navigation }) {
     setIsLoading(true);
     try {
       const response = await user.login(email, password);
+      console.log("login Error :", response);
       if (response) {
         if (response.status === 200) {
           if (response.data.error) {
@@ -34,6 +35,8 @@ function LoginView({ navigation }) {
             navigation.replace("QRScanner", { name: response.data.firstName });
             setIsLoading(false);
           }
+        } else {
+          Alert.alert("Connection Error", "Try again later");
         }
       }
     } catch (error) {
