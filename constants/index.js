@@ -1,1 +1,1 @@
-export const backendUrl = "http://10.10.21.206:4000"; // change as your ip
+export const backendUrl = "http://192.168.8.109:4000"; // change as your ip

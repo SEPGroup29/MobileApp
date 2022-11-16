@@ -14,6 +14,7 @@ export async function resolver(axiosResponse) {
     }
     return response;
   } catch (error) {
+    console.log(error);
     return new Error(error);
   }
 }

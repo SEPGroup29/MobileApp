@@ -8,6 +8,7 @@ import {
   Alert,
 } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
+import operator from "../../api/modules/operator";
 
 function QRScannerView({ navigation, route }) {
   const [hasPermission, setHasPermission] = React.useState(null);
@@ -20,23 +21,75 @@ function QRScannerView({ navigation, route }) {
     })();
   }, []);
 
-  const handleBarCodeScanned = ({ data }) => {
+  const handleBarCodeScanned = async ({ data }) => {
     setScanned(true);
     data = JSON.parse(data);
-    console.log(data.NIC);
-    Alert.alert("Scanned!", `ID number: ${data.NIC}`, [
-      {
-        text: "OK",
-        onPress: () => {
-          navigation.replace("FuelFill", {
-            id: data.NIC,
-            poName: route.params.name,
-          });
-          setScanned(true);
+    console.log(route.params.poId);
+    if (data.NIC && data.id) {
+      try {
+        const response = await operator.checkVehicleEligibility(
+          data.id,
+          route.params.poId
+        );
+        if (response) {
+          if (response.status === 200) {
+            if (response.data.error) {
+              Alert.alert("Error", response.data.error, [
+                { text: "OK", onPress: () => setScanned(false) },
+              ]);
+            } else if (response.data.result === "success") {
+              const vehicles = response.data.vehicleList;
+              console.log(vehicles);
+
+              // Alert.alert("Success", "Vehicle is eligible", [
+              //   { text: "OK", onPress: () => setScanned(false) },
+              // ]);
+
+              Alert.alert("Success", "Select Vehicle", [
+                ...vehicles.map((vehicle) => ({
+                  text: vehicle.regNo,
+                  onPress: () =>
+                    navigation.replace("FuelFill", {
+                      nic: data.NIC,
+                      u_id: data.id,
+                      poName: route.params.name,
+                      vehNumber: vehicle.regNo,
+                      reqFuel: vehicle.requestedFuel,
+                      fuelType: vehicle.fuelType,
+                    }),
+                })),
+              ]);
+            }
+          } else {
+            Alert.alert("Connection Error", "Try again later");
+          }
+        }
+      } catch (error) {
+        Alert.alert("Error", "Something went wrong");
+      }
+    } else {
+      Alert.alert("Invalid QR Code", "Please scan a valid QR code", [
+        {
+          text: "OK",
+          onPress: () => setScanned(false),
         },
-      },
-      { text: "Cancel", onPress: () => setScanned(false) },
-    ]);
+      ]);
+    }
+
+    // Alert.alert("Scanned!", `ID number: ${data.NIC}`, [
+    //   {
+    //     text: "OK",
+    //     onPress: () => {
+    //       navigation.replace("FuelFill", {
+    //         nic: data.NIC,
+    //         u_id: data.id,
+    //         poName: route.params.name,
+    //       });
+    //       setScanned(true);
+    //     },
+    //   },
+    //   { text: "Cancel", onPress: () => setScanned(false) },
+    // ]);
     // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
   };
 
