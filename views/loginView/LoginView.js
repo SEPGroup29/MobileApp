@@ -23,9 +23,12 @@ function LoginView({ navigation }) {
 
   const buttonPressed = async () => {
     setIsLoading(true);
+    if (email === "" || password === "") {
+      Alert.alert("Error", "Please fill all fields");
+      setIsLoading(false);
+    }
     try {
       const response = await user.login(email, password);
-      console.log("login Error :", response);
       if (response) {
         if (response.status === 200) {
           if (response.data.error) {
@@ -37,6 +40,7 @@ function LoginView({ navigation }) {
           }
         } else {
           Alert.alert("Connection Error", "Try again later");
+          setIsLoading(false);
         }
       }
     } catch (error) {
