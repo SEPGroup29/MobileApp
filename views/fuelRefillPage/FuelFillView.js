@@ -10,12 +10,10 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-import user from "../../api/modules/user";
 
 function FuelFillView({ navigation, route }) {
   const [fuelQuantityInput, setFuelQuantityInput] = React.useState("");
   const [fuelQuantity, setFuelQuantity] = React.useState(0);
-  const [voName, setVoName] = React.useState("");
 
   const updateFuel = async () => {
     if (/^\d+$/.test(fuelQuantityInput)) {
@@ -35,37 +33,34 @@ function FuelFillView({ navigation, route }) {
     }
   };
 
-  useEffect(() => {
-    getVoName();
-  }, []);
-
-  const getVehicleList = async () => {};
+  useEffect(() => {}, []);
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <KeyboardAvoidingView style={styles.container} behavior="padding">
         <Text style={styles.heading}>{route.params.nic}</Text>
-        <Text style={styles.heading}>{voName}</Text>
         <View style={styles.vehicleNumberContainer}>
-          <Text style={[styles.heading, styles.vehicleNumber]}>AXQ-6484</Text>
+          <Text style={[styles.heading, styles.vehicleNumber]}>
+            {route.params.vehNumber}
+          </Text>
         </View>
-        <Text style={styles.vehicleType}>Motor Bike - Petrol</Text>
+        <Text style={styles.vehicleType}>{route.params.vehType}</Text>
         <View style={styles.fuelTypeContainer}>
           <View>
             <Text style={styles.fuelTypeHeader}>Fuel Type: </Text>
           </View>
           <View>
-            <Text style={styles.fuelType}>Petrol</Text>
+            <Text style={styles.fuelType}>{route.params.fuelType}</Text>
           </View>
         </View>
         <View style={styles.remainingFuelQuotaContainer}>
           <View style={styles.remainingFuelQuotaLine}></View>
           <Text style={styles.remainingFuelQuotaText}>
-            Remaining Fuel Quota
+            Requested Fuel Quota
           </Text>
           <View style={styles.remainingFuelQuotaLine}></View>
         </View>
-        <Text style={styles.remainingFuelQuota}>20.00 L</Text>
+        <Text style={styles.remainingFuelQuota}>{route.params.reqFuel} L</Text>
         <View style={styles.horizontalLine} />
         <TextInput
           style={styles.fuelAmountInput}
@@ -81,7 +76,10 @@ function FuelFillView({ navigation, route }) {
         <TouchableOpacity
           style={styles.logoutButton}
           onPress={() =>
-            navigation.replace("QRScanner", { name: route.params.poName })
+            navigation.replace("QRScanner", {
+              name: route.params.poName,
+              poId: route.params.poId,
+            })
           }
         >
           <Text style={styles.logoutButtonText}> Scan Another QR </Text>

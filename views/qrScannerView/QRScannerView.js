@@ -14,6 +14,8 @@ function QRScannerView({ navigation, route }) {
   const [hasPermission, setHasPermission] = React.useState(null);
   const [scanned, setScanned] = React.useState(false);
 
+  console.log(scanned);
+
   useEffect(() => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -48,15 +50,19 @@ function QRScannerView({ navigation, route }) {
               Alert.alert("Success", "Select Vehicle", [
                 ...vehicles.map((vehicle) => ({
                   text: vehicle.regNo,
-                  onPress: () =>
+                  onPress: () => {
+                    setScanned(false);
                     navigation.replace("FuelFill", {
+                      poId: route.params.poId,
                       nic: data.NIC,
                       u_id: data.id,
                       poName: route.params.name,
                       vehNumber: vehicle.regNo,
                       reqFuel: vehicle.requestedFuel,
                       fuelType: vehicle.fuelType,
-                    }),
+                      vehType: vehicle.vehicleType.description,
+                    });
+                  },
                 })),
               ]);
             }
