@@ -25,8 +25,16 @@ function QRScannerView({ navigation, route }) {
 
   const handleBarCodeScanned = async ({ data }) => {
     setScanned(true);
-    data = JSON.parse(data);
-    console.log(route.params.poId);
+
+    try {
+      data = JSON.parse(data);
+    } catch (error) {
+      Alert.alert("Invalid QR Code", "Please scan a valid QR code", [
+        { text: "OK", onPress: () => setScanned(false) },
+      ]);
+      return;
+    }
+
     if (data.NIC && data.id) {
       try {
         const response = await operator.checkVehicleEligibility(
@@ -64,6 +72,7 @@ function QRScannerView({ navigation, route }) {
                     });
                   },
                 })),
+                { text: "Cancel", onPress: () => setScanned(false) },
               ]);
             }
           } else {
