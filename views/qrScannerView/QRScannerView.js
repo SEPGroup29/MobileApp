@@ -65,6 +65,7 @@ function QRScannerView({ navigation, route }) {
                       nic: data.NIC,
                       u_id: data.id,
                       poName: route.params.name,
+                      vehicleId: vehicle._id,
                       vehNumber: vehicle.regNo,
                       reqFuel: vehicle.requestedFuel,
                       fuelType: vehicle.fuelType,

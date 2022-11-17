@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
+import operator from "../../api/modules/operator";
 
 function FuelFillView({ navigation, route }) {
   const [fuelQuantityInput, setFuelQuantityInput] = React.useState("");
@@ -17,14 +18,41 @@ function FuelFillView({ navigation, route }) {
 
   const updateFuel = async () => {
     if (/^\d+$/.test(fuelQuantityInput)) {
-      const value = parseInt(fuelQuantityInput);
+      const value = parseFloat(fuelQuantityInput);
       if (value < 1 || isNaN(value)) {
         Alert.alert("Fuel Quantity must be greater than 0");
         setFuelQuantityInput("");
         setFuelQuantity(0);
       } else {
-        Alert.alert("Fuel Quantity is " + value);
         setFuelQuantity(value);
+        setFuelQuantityInput(value.toString());
+        if (value <= route.params.reqFuel) {
+          const response = await operator.pumpFuel(
+            route.params.vehicleId,
+            route.params.poId,
+            fuelQuantity
+          );
+          console.log("response", response);
+          if (response) {
+            if (response.status === 200) {
+              if (response.data.error) {
+                Alert.alert("Error", response.data.error);
+              } else if (response.data.result === "success") {
+                Alert.alert("Success", "Fuel Filled Successfully");
+                navigation.replace("QRScanner", {
+                  name: route.params.name,
+                  poId: route.params.poId,
+                });
+              }
+            } else {
+              Alert.alert("Error", "Something went wrong");
+            }
+          }
+        } else {
+          Alert.alert(
+            "Fuel Quantity must be less than or equal to required fuel"
+          );
+        }
       }
     } else {
       Alert.alert("Invalid Input", "Please enter a valid number");
