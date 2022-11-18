@@ -3,6 +3,7 @@ import FuelFillView from "./views/fuelRefillPage/FuelFillView";
 import QRScannerView from "./views/qrScannerView/QRScannerView";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import AppLoader from "./views/loader/AppLoader";
 
 const Stack = createNativeStackNavigator();
 
@@ -14,6 +15,11 @@ export default function App() {
           name="Login"
           component={LoginView}
           options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="AppLoader"
+          component={AppLoader}
+          options={{ headerShown: true }}
         />
         <Stack.Screen
           name="FuelFill"

@@ -30,7 +30,7 @@ function FuelFillView({ navigation, route }) {
           const response = await operator.pumpFuel(
             route.params.vehicleId,
             route.params.poId,
-            fuelQuantity
+            value
           );
           console.log("response", response);
           if (response) {
