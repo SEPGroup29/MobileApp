@@ -12,9 +12,6 @@ export default {
     );
   },
   async pumpFuel(vehicleId, pumpOperatorId, fuelQuantity) {
-    console.log("vehicleId", vehicleId);
-    console.log("pumpOperatorId", pumpOperatorId);
-    console.log("fuelQuantity", fuelQuantity);
     return await resolver(
       axiosClient.post("api/pump-operator/pump-fuel", {
         vehicleId: vehicleId,

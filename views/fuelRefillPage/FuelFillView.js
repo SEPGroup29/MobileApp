@@ -32,7 +32,6 @@ function FuelFillView({ navigation, route }) {
             route.params.poId,
             value
           );
-          console.log("response", response);
           if (response) {
             if (response.status === 200) {
               if (response.data.error) {
@@ -105,7 +104,7 @@ function FuelFillView({ navigation, route }) {
           style={styles.logoutButton}
           onPress={() =>
             navigation.replace("QRScanner", {
-              name: route.params.poName,
+              name: route.params.name,
               poId: route.params.poId,
             })
           }
