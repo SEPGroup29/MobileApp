@@ -1,1 +1,1 @@
-export const backendUrl = "http://192.168.1.26:4000"; // change as your ip
+export const backendUrl = "https://fuelq.azurewebsites.net"; // change as your ip
